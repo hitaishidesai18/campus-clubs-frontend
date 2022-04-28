@@ -1,5 +1,5 @@
 import React, {Fragment, Card, Button, useState, useEffect} from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import {BrowserRouter as Router, Switch, Route, Link, Routes} from 'react-router-dom';
 
@@ -11,6 +11,10 @@ const StudentHome = () => {
     const location = useLocation();
    const userId = location.state.userId;
 
+   const navigate = useNavigate();
+   const toClubPosts = (clubId) => navigate('/clubposts', 
+     { state: { clubId : clubId } }
+    );
    const [myclubs, setMyClubs] = useState([]);
     
     
@@ -38,12 +42,13 @@ const StudentHome = () => {
 
     return(
         <Fragment>
+            <Link to="/">Logout</Link>
            <h1 className="text-center mt-5" onClick={getmyclubs}>Student home</h1>
         <div class ="container">
         <ul class="list-group">
             <li class="list-group-item list-group-item-dark">
             {myclubs.map(club =>(
-              <div class="card">
+              <div class="card"onClick = {() => toClubPosts(club.club_id)}>
               <div class="card-body">
                 <h5 class="card-title">{club.club_name}</h5>
                 <p class="card-text">{club.category}</p>
