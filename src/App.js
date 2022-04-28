@@ -10,6 +10,8 @@ import AdminHome from './components/AdminHome';
 import ClubheadHome from './components/ClubheadHome';
 import ClubEditableComponent from './components/ClubEditableComponent';
 import ClubPosts from './components/ClubPosts';
+import NewPost from './components/NewPost';
+import ManageClubs from './components/ManageClubs'
 
 
 const App = () => {
@@ -30,6 +32,9 @@ const App = () => {
           <Route path="/clubheadhome" element={<ClubheadHome/>}/>
           <Route path="/clubeditable" element={<ClubEditableComponent/>}/>
           <Route path="/clubposts" element={<ClubPosts/>}/>
+          <Route path="/newpost" element={<NewPost/>}/>
+          <Route path="/manageclubs" element={<ManageClubs/>}/>
+       
         </Routes>
       </div>
     </Router>

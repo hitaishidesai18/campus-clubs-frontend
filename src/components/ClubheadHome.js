@@ -10,8 +10,8 @@ const ClubheadHome = () => {
    const userId = location.state.userId;
 
    const navigate = useNavigate();
-   const toClub = (clubId) => navigate('/clubeditable', 
-     { state: { clubId : clubId } }
+   const toClub = (clubId, clubName) => navigate('/clubeditable', 
+     { state: { clubId : clubId , clubName: clubName} }
     );
 
    const [myclubs, setMyClubs] = useState([]);
@@ -50,7 +50,7 @@ const ClubheadHome = () => {
             <li class="list-group-item list-group-item-dark">
             {myclubs.map(club =>(
                 
-              <div class="card" onClick = {() => toClub(club.club_id)}>
+              <div class="card" onClick = {() => toClub(club.club_id, club.club_name)}>
               <div class="card-body">
                 <h5 class="card-title" > {club.club_name}</h5>
                 <p class="card-text" >{club.category}</p>
