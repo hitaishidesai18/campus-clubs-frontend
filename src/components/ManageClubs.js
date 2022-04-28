@@ -33,48 +33,50 @@ const ManageClubs = () => {
 
    }
 
+   async function myFunction(item){
+        
+    const id = item.club_id;
+  
+    const name = item.club_name;
+    var count = 0;
+    try{
+     const response = await fetch(`http://localhost:5000/campusclubs/club/isfollowed/${userId}/${id}`);
+     const jsonData = await response.json();
+
+     count = jsonData.count;
+     var following = "not following";
+    if(count>0)following = "following";
+    var a = {id:id, name:name, following: following};
+    followingList.push(a);
+    console.log(followingList);
+     console.log(jsonData);
+     setFollowList(followingList)
+     
+ }catch (error) {
+  console.error(error.message);
+ }
+ 
+}
    const getFollowingList = async e  => {
        
        allclubs.forEach(myFunction);
-       async function myFunction(item){
-        
-           const id = item.club_id;
-         
-           const name = item.club_name;
-           var count = 0;
-           try{
-            const response = await fetch(`http://localhost:5000/campusclubs/club/isfollowed/${userId}/${id}`);
-            const jsonData = await response.json();
- 
-            count = jsonData.count;
-            var following = "not following";
-        if(count>0)following = "following";
-        var a = {id:id, name:name, following: following};
-        followingList.push(a);
-        console.log(followingList);
-            console.log(jsonData);
-            
-        }catch (error) {
-         console.error(error.message);
-        }
-        
-       }
+       
 
       
    }
-   const startFollowing = async e => {
-    try {
-     const body ={userId, clubId};
-     const response = fetch("http://localhost:5000/campusclubs/club/follow",{
-         method: "POST",
-         headers: {"Content-Type": "application/json"},
-         body: JSON.stringify(body)
-     });
-    } catch (error) {
-        console.error(error.message);
+//    const startFollowing = async e => {
+//     try {
+//      const body ={userId, clubId};
+//      const response = fetch("http://localhost:5000/campusclubs/club/follow",{
+//          method: "POST",
+//          headers: {"Content-Type": "application/json"},
+//          body: JSON.stringify(body)
+//      });
+//     } catch (error) {
+//         console.error(error.message);
         
-    }
-}
+//     }
+// }
 
    return(
     <div class="container">
@@ -98,7 +100,8 @@ const ManageClubs = () => {
                <td>{a.name}</td>
                <td >{a.following}</td>
                <td><button className="btn btn-success"
-                                onClick={() => {setClubId(a.id); startFollowing();}}>Follow</button></td>
+                                //onClick={() => {setClubId(a.id); startFollowing();}}
+                                >Follow</button></td>
                <td><button className="btn btn-danger">Unfollow</button></td>
              </tr>
           ))}
