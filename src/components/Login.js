@@ -1,6 +1,6 @@
 import React, {Fragment, useState} from "react";
+import {  useNavigate } from "react-router-dom";
 
-import Register from "./Register";
 import {BrowserRouter as Router, Switch, Route, Link, Routes} from 'react-router-dom';
 
 const Login = () => {
@@ -8,6 +8,10 @@ const Login = () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const toStudent = () => navigate('/studenthome', 
+     { state: { username : username } }
+ );
    
     const verify = false;
     const onSubmitForm = async e => {
@@ -20,7 +24,10 @@ const Login = () => {
             const jsonData = await response.json();
           
             if(jsonData.user_password == password){
-                window.location = "/studenthome";
+               //window.location = "/studenthome";
+               toStudent();
+               // const navigate = useNavigate();
+                
             }
 
             console.log(jsonData);
@@ -50,7 +57,9 @@ const Login = () => {
                     value = {password}
                     onChange = {e => setPassword(e.target.value)}
                     />
-                <button className="btn btn-success">Login</button>
+                <button className="btn btn-success">
+                        Login 
+                </button>
                 
             </form>
             <Link to="/register">New user? Register</Link>
