@@ -32,7 +32,18 @@ const StudentHome = () => {
 
     return(
         <Fragment>
-           <h1 className="text-center mt-5" onClick={getmyclubs}>Student home</h1> 
+           <h1 className="text-center mt-5" onClick={getmyclubs}>Student home</h1>
+           <ul class="list-group">
+            <li class="list-group-item list-group-item-dark">
+              <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div></li>
+
+  
+</ul> 
         
         <div>  
             student
