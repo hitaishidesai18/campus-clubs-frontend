@@ -16,7 +16,7 @@ const StudentHome = () => {
     
    // const [user_id, serUserId] = useState("");
      const getmyclubs = async e => {
-    //     e.preventDefault();
+
      
          try {
             //get clubs that user follows

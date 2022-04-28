@@ -12,7 +12,13 @@ const Login = () => {
     const navigate = useNavigate();
     const toStudent = (userId) => navigate('/studenthome', 
      { state: { userId : userId } }
- );
+    );
+    const toAdmin = (userId) => navigate('/adminhome', 
+        { state: { userId : userId } }
+    );
+    const toClubhead = (userId) => navigate('/clubheadhome', 
+        { state: { userId : userId } }
+    );
    
  
     const onSubmitForm = async e => {
@@ -27,7 +33,14 @@ const Login = () => {
             if(jsonData.user_password == password){
                 //setUserId(5);
                //window.location = "/studenthome";
-               toStudent(jsonData.user_id);
+               const roleId = jsonData.r_id;
+               const userId = jsonData.user_id;
+               if(roleId==1)
+                    toStudent(userId);
+                else if(roleId==2)
+                    toClubhead(userId);
+                else if(roleId==3)
+                    toAdmin(userId);
                
                // const navigate = useNavigate();
                 

@@ -5,26 +5,10 @@ import './App.css';
 import Login from './components/Login';
 import Register from './components/Register';
 import StudentHome from './components/StudentHome';
+import AdminHome from './components/AdminHome';
+import ClubheadHome from './components/ClubheadHome';
 
 import {BrowserRouter as Router, Switch, Route, Link, Routes} from 'react-router-dom';
-// function App(){
-
-//     return(
-//       <Router>
-//         <div className='App'>
-//           <Nav />
-//           <Route path="/about" component ={About}/>
-//           <Route path="/shop" component ={Shop}/>
-//         </div>
-//         </Router>
-
-//         // <div className='App'>
-//         //   <Nav />
-//         //   <About />
-//         //   <Shop />
-//         // </div>
-//     );
-// }
 
 const App = () => {
   return (
@@ -40,6 +24,8 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/studenthome" element={<StudentHome />} />
+          <Route path="/adminhome" element={<AdminHome/>}/>
+          <Route path="/clubheadhome" element={<ClubheadHome/>}/>
         </Routes>
       </div>
     </Router>
