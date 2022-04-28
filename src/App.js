@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import './App.css';
-import Nav from './components/Nav'
-import About from './components/About';
+//import Nav from './components/Nav'
+//import About from './components/About';
 import Login from './components/Login';
 import Register from './components/Register';
+import StudentHome from './components/StudentHome';
 
 import {BrowserRouter as Router, Switch, Route, Link, Routes} from 'react-router-dom';
-
 // function App(){
 
 //     return(
@@ -31,14 +31,15 @@ const App = () => {
     <Router>
       <div>
         <div>
-          <Nav />
+      
         
         </div>
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/about" element={<About />} />
+          
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/studenthome" element={<StudentHome />} />
         </Routes>
       </div>
     </Router>
