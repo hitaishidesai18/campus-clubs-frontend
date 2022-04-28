@@ -8,24 +8,27 @@ const Login = () => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    //const [userId, setUserId] = useState();
     const navigate = useNavigate();
-    const toStudent = () => navigate('/studenthome', 
-     { state: { username : username } }
+    const toStudent = (userId) => navigate('/studenthome', 
+     { state: { userId : userId } }
  );
    
-    const verify = false;
+ 
     const onSubmitForm = async e => {
         e.preventDefault();
      
         try {
             //get user with username and check if password matches
             
-            const response = await fetch(`http://localhost:5000/campusclubs/user/getpassword/${username}`);
+            const response = await fetch(`http://localhost:5000/campusclubs/user/getuserbyusername/${username}`);
             const jsonData = await response.json();
           
             if(jsonData.user_password == password){
+                //setUserId(5);
                //window.location = "/studenthome";
-               toStudent();
+               toStudent(jsonData.user_id);
+               
                // const navigate = useNavigate();
                 
             }
