@@ -11,7 +11,8 @@ import ClubheadHome from './components/ClubheadHome';
 import ClubEditableComponent from './components/ClubEditableComponent';
 import ClubPosts from './components/ClubPosts';
 import NewPost from './components/NewPost';
-import ManageClubs from './components/ManageClubs'
+import ManageClubs from './components/ManageClubs';
+import AddClub from "./components/AddClub";
 
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
           <Route path="/clubposts" element={<ClubPosts/>}/>
           <Route path="/newpost" element={<NewPost/>}/>
           <Route path="/manageclubs" element={<ManageClubs/>}/>
+          <Route path="/addclub" element={<AddClub/>}/>
        
         </Routes>
       </div>
