@@ -32,6 +32,23 @@ const AdminHome = () => {
 console.log(userId);
    }
 
+   //deleteClub function : 
+  
+  const deleteClub = async (id) => {
+    console.log("deleeteee club")
+    try {
+      const deleteClub = await fetch(`http://localhost:5000/campusclubs/club/delete/${id}`,{
+        method: "DELETE" 
+      });
+      window.location.reload(false);
+      //setClubId(clubId.filter(club => clubId.club_id != id));
+      console.log(deleteClub)
+    } catch (err) {
+      console.error(err.message)
+    }
+  }
+
+
    return(
     
 
@@ -58,7 +75,7 @@ console.log(userId);
                <td>{club.club_id}</td>
                <td>{club.club_name}</td>
                <td><button className="btn btn-warning">Update</button></td>
-               <td><button className="btn btn-danger">Delete</button></td>
+               <td><button className="btn btn-danger" onClick = {() => deleteClub(club.club_id)}>Delete Club</button></td>
              </tr>
           ))}
        

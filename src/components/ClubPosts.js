@@ -25,6 +25,9 @@ const ClubPosts = () =>{
          console.error(error.message);
     }
    }
+
+  
+  
    
 
     return(
@@ -39,6 +42,7 @@ const ClubPosts = () =>{
                                 <h5 class="card-title">{post.title}</h5>
                                 <p class="card-text">{post.body}</p>
                                 <p class="card-text">Attached media: <i>{post.media_link}</i></p>
+                               
                             </div>
                             </div>
                         ))}

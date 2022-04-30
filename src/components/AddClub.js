@@ -1,4 +1,5 @@
 import React, {Fragment, useState} from "react";
+import { useLocation , useNavigate, Link} from "react-router-dom";
 
 const AddClub = () => {
 
@@ -8,6 +9,8 @@ const AddClub = () => {
     const [category, setCategory] = useState("");
     const [clubheadId, setClubheadId] = useState(9);
 
+    const navigate = useNavigate();
+   const toBackAdmin = () => navigate(-1);
     
     const onSubmitForm = async e => {
         e.preventDefault();
@@ -21,6 +24,7 @@ const AddClub = () => {
             });
 
             console.log(response);
+            toBackAdmin();
         } catch (error) {
             console.error(error.message);
         }

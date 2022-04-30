@@ -9,6 +9,7 @@ const ClubEditableComponent = () =>{
     const location = useLocation();
    const clubId = location.state.clubId;
    const clubName = location.state.clubName;
+   const [deleteId, setDeleteId] = useState("");
 
    const navigate = useNavigate();
    const toNewPost = (clubId, clubName) => navigate('/newpost', 
@@ -31,6 +32,24 @@ const ClubEditableComponent = () =>{
          console.error(error.message);
     }
    }
+   
+
+   //delete post
+
+   const deletePost = async (id) => {
+    console.log("deleteeeeeeee");
+  try {
+    const deletePost = await fetch(`http://localhost:5000/campusclubs/post/delete/${id}`,{
+      method: "DELETE" 
+    });
+    setPosts(posts.filter(posts => posts.post_id != id));
+    console.log(deletePost);
+
+  } catch (err) {
+    console.error(err.message)
+  }
+}
+ 
 
    
    
@@ -49,6 +68,7 @@ const ClubEditableComponent = () =>{
                                 <h5 class="card-title">{post.title}</h5>
                                 <p class="card-text">{post.body}</p>
                                 <p class="card-text">Attached media: <i>{post.media_link}</i></p>
+                                <button className="btn btn-lg btn-danger" onClick = {()=> deletePost(post.post_id)} >Delete Post</button>
                             </div>
                             </div>
                         ))}
