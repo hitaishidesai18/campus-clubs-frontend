@@ -4,16 +4,21 @@ import { useLocation , Link} from "react-router-dom";
 const ManageClubs = () => {
     useEffect(()=>{
         getallclubs();
-        getFollowingList();
+        getMyClubs();
+        getUnfollowed();
+        
     }, [])
 
    const location = useLocation();
    const userId = location.state.userId;
    const [allclubs, setallclubs] = useState([]);
+   const [myclubs, setmyclubs] = useState([]);
+   const [notFollowingClubs, setNotFollowingClubs] = useState([]);
    const [followList, setFollowList] = useState([]);
    const [clubId, setClubId] = useState("");
    const [clubName, setClubName] = useState("");
-   const [follow, setFollow]  = useState("not following")
+   const [follow, setFollow]  = useState("not following");
+   const [loopVal, setLoopVal] = useState(0);
     var followingList =[];
    
 
@@ -32,9 +37,42 @@ const ManageClubs = () => {
     }
 
    }
+   const getMyClubs = async e => {
+    try {
+        //get all clubs
+        
+        const response = await fetch(`http://localhost:5000/campusclubs/club/getmyclubs/${userId}`);
+        const jsonData = await response.json();
+
+        console.log(jsonData.rows);
+        setmyclubs(jsonData.rows);
+
+     } catch (error) {
+         console.error(error.message);
+    }
+
+   }
+
+   const getUnfollowed = async e =>{
+     var unfollowedClubsList =[];
+     allclubs.forEach(club =>{
+        myclubs.forEach( followedClub =>{
+          if(club.club_id == followedClub.club_id){
+
+          }else{
+            console.log(club);
+              unfollowedClubsList.push(club);
+          }
+        });
+     });
+     console.log("hi");
+     console.log(unfollowedClubsList);
+     setNotFollowingClubs(unfollowedClubsList);
+   }
 
    async function myFunction(item){
-        
+    
+    if(loopVal==1)return;
     const id = item.club_id;
   
     const name = item.club_name;
@@ -50,7 +88,9 @@ const ManageClubs = () => {
     followingList.push(a);
     console.log(followingList);
      console.log(jsonData);
-     setFollowList(followingList)
+     setFollowList(followingList);
+     
+     //getFollowingList();
      
  }catch (error) {
   console.error(error.message);
@@ -64,6 +104,8 @@ const ManageClubs = () => {
 
       
    }
+
+  
 //    const startFollowing = async e => {
 //     try {
 //      const body ={userId, clubId};
@@ -80,7 +122,7 @@ const ManageClubs = () => {
 
    return(
     <div class="container">
-    <h2 className="text-center mt-5">My Clubs</h2>
+    <h2 className="text-center mt-5" >My Clubs</h2>
     <p>The table shows all clubs stored in the database.</p>            
     <table class="table">
       <thead>
@@ -88,21 +130,20 @@ const ManageClubs = () => {
 
           <th>Club ID</th>
           <th>ClubName</th>
-          <th>Follow status</th>
-          <th>Update</th>
-          <th>Delete</th>
+          
+          <th>Follow</th>
+          
         </tr>
       </thead>
       <tbody>
-          {followList.map(a=>(
+          {notFollowingClubs.map(club=>(
                <tr>
-               <td >{a.id}</td>
-               <td>{a.name}</td>
-               <td >{a.following}</td>
+               <td >{club.club_id}</td>
+               <td>{club.club_name}</td>
                <td><button className="btn btn-success"
                                 //onClick={() => {setClubId(a.id); startFollowing();}}
                                 >Follow</button></td>
-               <td><button className="btn btn-danger">Unfollow</button></td>
+               
              </tr>
           ))}
        
