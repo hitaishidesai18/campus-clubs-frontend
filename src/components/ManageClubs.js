@@ -58,10 +58,13 @@ const ManageClubs = () => {
      allclubs.forEach(club =>{
         myclubs.forEach( followedClub =>{
           if(club.club_id == followedClub.club_id){
-
+            console.log("true hai");
+            console.log(club.club_id);
           }else{
             console.log(club);
+            console.log("false hai");
               unfollowedClubsList.push(club);
+              console.log(unfollowedClubsList);
           }
         });
      });
@@ -120,6 +123,36 @@ const ManageClubs = () => {
 //     }
 // }
 
+const followClub = async (clubId) =>{
+  try {
+           
+    const body ={user_id : userId, club_id : clubId};
+    const response = fetch("http://localhost:5000/campusclubs/club/follow",{
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(body)
+    });
+
+    console.log(response);
+} catch (error) {
+    console.error(error.message);
+}
+}
+const unfollowClub = async (clubId) =>{
+  try {
+           
+    const deletefollow = await fetch(`http://localhost:5000/campusclubs/club/unfollow/${userId}/${clubId}`,{
+      method: "DELETE" 
+    });
+   
+    console.log(deletefollow);
+
+} catch (error) {
+    console.error(error.message);
+}
+}
+
+
    return(
     <div class="container">
     <h2 className="text-center mt-5" >My Clubs</h2>
@@ -132,17 +165,22 @@ const ManageClubs = () => {
           <th>ClubName</th>
           
           <th>Follow</th>
+          <th>Unfollow</th>
           
         </tr>
       </thead>
       <tbody>
-          {notFollowingClubs.map(club=>(
+          {allclubs.map(club=>(
                <tr>
                <td >{club.club_id}</td>
                <td>{club.club_name}</td>
                <td><button className="btn btn-success"
-                                //onClick={() => {setClubId(a.id); startFollowing();}}
+                                onClick={() => {followClub(club.club_id);}}
                                 >Follow</button></td>
+                
+                <td><button className="btn btn-danger"
+                                onClick={() => {unfollowClub(club.club_id);}}
+                                >Unfollow</button></td>
                
              </tr>
           ))}
